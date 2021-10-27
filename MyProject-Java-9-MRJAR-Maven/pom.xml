@@ -28,7 +28,7 @@
 
 	<build>
 		<pluginManagement>
-		<plugins>
+			<plugins>
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>3.1.0</version>
@@ -39,10 +39,10 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
+					<version>3.8.1</version>
 					<executions>
 						<execution>
-							<id>compile-java-8</id>
+							<id>jdk8-compile</id>
 							<goals>
 								<goal>compile</goal>
 							</goals>
@@ -51,18 +51,18 @@
 							</configuration>
 						</execution>
 						<execution>
-							<id>compile-java-9</id>
-							    <goals>
+							<id>jdk11-compile</id>
+							<goals>
 								<goal>compile</goal>
 							</goals>
 							<configuration>
 								<release>9</release>
+								<multiReleaseOutput>true</multiReleaseOutput>
 								<compileSourceRoots>
-									<compileSourceRoot>${project.basedir}/src/main/java9</compileSourceRoot>
+											<compileSourceRoot>src/main/java9</compileSourceRoot>
 								</compileSourceRoots>
-								<outputDirectory>${project.build.outputDirectory}/META-INF/versions/9</outputDirectory>
 							</configuration>
-						</execution>
+						</execution>					
 					</executions>
 				</plugin>
 				<plugin>
@@ -73,11 +73,11 @@
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>3.0.2</version>
 					<configuration>
-						<release>9</release>
-						<compileSourceRoots>
-							<compileSourceRoot>${project.basedir}/src/main/java9</compileSourceRoot>
-						</compileSourceRoots>
-						<multiReleaseOutput>true</multiReleaseOutput>
+						<archive>
+							<manifestEntries>
+								<Multi-Release>true</Multi-Release>
+							</manifestEntries>
+						</archive>
 					</configuration>
 				</plugin>
 				<plugin>
